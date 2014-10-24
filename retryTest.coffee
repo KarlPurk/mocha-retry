@@ -1,4 +1,4 @@
-util = require './util';
+util = require './util'
 
 RetryTest = (times, title, fn) ->
   Runnable.call this, title, fn
