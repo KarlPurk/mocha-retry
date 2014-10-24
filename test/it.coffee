@@ -59,3 +59,13 @@ describe 'Some retry suite with before with retry on tests', ->
     if times % 2 isnt 0
       return done new Error "not even"
     done()
+
+describe 'Some retry suite with a beforeEach method', =>
+  value = 0
+  retryTimes = 3
+  expectedValue = times
+  beforeEach =>
+    value++
+  it retryTimes, 'should call beforeEach for every retry', =>
+    value.should.equal retryTimes
+    if value isnt retryTimes then throw new Error 'Not correct value'
