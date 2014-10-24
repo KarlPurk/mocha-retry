@@ -1,3 +1,5 @@
+util = require './util';
+
 RetryTest = (times, title, fn) ->
   Runnable.call this, title, fn
   @times = times
@@ -21,7 +23,9 @@ RetryTest::run = (fn) ->
     if err? and runTimes isnt @times
       runTimes++
       start = new Date
-      return @_run fn, done
+      util.runHook @suite, 'beforeEach', =>
+        return @_run fn, done
+      return
     @clearTimeout()
     @duration = new Date - start
     finished = true

@@ -56,6 +56,7 @@ module.exports = createInterface = (Mocha) ->
           times = if asuite.times? then asuite.times else 1
         fn = null if asuite.pending
         test = new RetryTest times, title, fn
+        test.suite = asuite
         test.file = file
         asuite.addTest test
         test
